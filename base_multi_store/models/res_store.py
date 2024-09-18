@@ -32,12 +32,38 @@ class ResStore(models.Model):
         help='If specified, this store will be only available on selected '
         'company',
     )
-
     user_ids = fields.Many2many(
         'res.users',
         'res_store_users_rel',
         'cid', 'user_id',
         'Users'
+    )
+    seq_req_id = fields.Many2one(
+        'ir.sequence',
+        'Secuencia de Requisicion'
+    )
+    seq_pay_cust_in = fields.Many2one(
+        'ir.sequence',
+        'Secuencia de Ingresos', required=True
+    )
+    seq_pay_cust_out = fields.Many2one(
+        'ir.sequence',
+        'Secuencia de Cust Out', required=True
+    )
+    seq_pay_supp_in = fields.Many2one(
+        'ir.sequence',
+        'Secuencia de Egresos', required=True
+    )
+    seq_pay_supp_out = fields.Many2one(
+        'ir.sequence',
+        'Secuencia de Egresos Out', required=True)
+    direccion = fields.Char(
+        'Direccion', size=250,
+        required=True
+    )
+    establishment = fields.Char(
+        string=u"Código establecimiento",
+        help=""
     )
 
     _sql_constraints = [
@@ -55,7 +81,7 @@ class ResStore(models.Model):
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
         context = dict(self._context or {})
-        newself = self
+        new_self = self
         if context.pop('user_preference', None):
             # We browse as superuser. Otherwise, the user would be able to
             # select only the currently visible stores (according to rules,
@@ -63,6 +89,6 @@ class ResStore(models.Model):
             # she belongs to some other stores.
             stores = self.env.user.store_id + self.env.user.store_ids
             args = (args or []) + [('id', 'in', stores.ids)]
-            newself = newself.sudo()
-        return super(ResStore, newself.with_context(context)).name_search(
+            new_self = new_self.sudo()
+        return super(ResStore, new_self.with_context(context)).name_search(
             name=name, args=args, operator=operator, limit=limit)
