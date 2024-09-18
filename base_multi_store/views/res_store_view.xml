@@ -8,6 +8,7 @@
             <tree string="Stores">
                 <field name="name"/>
                 <field name="company_id" groups="base.group_multi_company"/>
+                <field name="establishment"/>
                 <field name="parent_id"/>
             </tree>
         </field>
@@ -35,6 +36,13 @@
                             <field name="parent_id" domain="[('id', '!=', id),'|', ('company_id', '=', False), ('company_id', '=', company_id)]" context="{'default_company_id': company_id}"/>
                         </group>
                         <group name="col2">
+                            <field name="direccion" />
+                            <field name="establishment" />
+                            <field name="seq_req_id" />
+                            <field name="seq_pay_cust_in" />
+                            <field name="seq_pay_cust_out" />
+                            <field name="seq_pay_supp_in" />
+                            <field name="seq_pay_supp_out" />
                         </group>
                     </group>
                     <notebook>
