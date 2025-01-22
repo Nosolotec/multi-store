@@ -11,4 +11,9 @@
             </field>
         </field>
     </record>
+
+    <record id="stock.stock_picking_type_action" model="ir.actions.act_window">
+        <field name="context">{'list_only_my_store': True}</field>
+    </record>
+
 </odoo>
