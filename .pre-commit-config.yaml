@@ -1,0 +1,5 @@
+repos:
+-   repo: https://github.com/sbidoul/whool
+    rev: v0.5
+    hooks:
+    -   id: whool-init
