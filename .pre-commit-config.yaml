@@ -66,3 +66,7 @@ repos:
     rev: v6.2.1
     hooks:
       - id: rstcheck
+  - repo: https://github.com/sbidoul/whool
+    rev: v0.5
+    hooks:
+    -   id: whool-init
